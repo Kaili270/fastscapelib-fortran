@@ -89,7 +89,7 @@ module FastScapeContext
     u = 0.d0
     vx = 0.d0
     vy = 0.d0
-    etot = 0.d0
+   ! etot = 0.d0
     b = h
     precip = 1.d0
     p_mfd_exp(1:nn) = 1.d0
@@ -366,14 +366,14 @@ module FastScapeContext
   end subroutine InitF
 
   !---------------------------------------------------------------
+! Xiaoping modified here to have the etot for restart of aspect, Aug 2023
+   subroutine ResetCumulativeErosion (etotp)
+     double precision, intent(in), dimension(*) :: etotp
+     etot = etotp(1:nn)
 
-  subroutine ResetCumulativeErosion ()
+     return
 
-    etot = 0.d0
-
-    return
-
-  end subroutine ResetCumulativeErosion
+end subroutine ResetCumulativeErosion
 
   !---------------------------------------------------------------
 

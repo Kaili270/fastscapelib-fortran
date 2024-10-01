@@ -82,7 +82,7 @@ call system ('mkdir -p '//trim(foldername)//'/VTK')
     open(unit=77,file=(foldername//'/VTK/Topography'//cstep//'.vtk'),status='unknown', &
     form='unformatted',access='direct', recl=nheader+3*4*nn+nfooter+(npart1+10+npart2+4*nn) &
     +(npart1+5+npart2+4*nn)+(npart1+8+npart2+4*nn)+(npart1+12+npart2+4*nn)+(npart1+13+npart2+4*nn) &
-    +(npart1+13+npart2+4*nn)+(npart1+9+npart2+4*nn),convert='big_endian')
+    +(npart1+13+npart2+4*nn)+(npart1+9+npart2+4*nn)+(npart1+6+npart2+4*nn),convert='big_endian')
     write (77,rec=1) &
     header(1:nheader), &
     ((sngl(dx*(i-1)),sngl(dy*(j-1)),sngl(h(i+(j-1)*nx)*abs(vex)),i=1,nx),j=1,ny), &
@@ -93,7 +93,8 @@ call system ('mkdir -p '//trim(foldername)//'/VTK')
     part1(1:npart1)//'erosion_rate'//part2(1:npart2),sngl(erate(1:nn)), &
     part1(1:npart1)//'total_erosion'//part2(1:npart2),sngl(etot(1:nn)), &
     part1(1:npart1)//'drainage_area'//part2(1:npart2),sngl(a(1:nn)) , &
-    part1(1:npart1)//'catchment'//part2(1:npart2),sngl(catch(1:nn))
+    part1(1:npart1)//'catchment'//part2(1:npart2),sngl(catch(1:nn)), &
+    part1(1:npart1)//'uplift'//part2(1:npart2),sngl(u(1:nn))
     close(77)
 
     if (vex.lt.0.d0) then

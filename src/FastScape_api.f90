@@ -97,7 +97,7 @@
 ! as an array of dimension nn(=nx*ny)
 ! F is double precision of size nn
 
-! FastScape_Copy_Etot (etot)
+! FastScape_Copy_Tottal_Erosion (etot)
 ! returns the current cumulative erosion (in m)
 ! as an array of dimension nn(=nx*ny)
 ! etot is double precision of size nn
@@ -646,14 +646,15 @@ subroutine FastScape_Set_V (ux,uy)
 end subroutine FastScape_Set_V
 
 !--------------------------------------------------------------------------
-
-subroutine FastScape_Reset_Cumulative_Erosion ()
+! Updated totalerosion_20240303
+subroutine FastScape_Reset_Cumulative_Erosion (etotp)
 
   use FastScapeContext
 
   implicit none
 
-  call ResetCumulativeErosion ()
+ double precision, intent(in), dimension(*) :: etotp 
+ call ResetCumulativeErosion (etotp)
 
   return
 
